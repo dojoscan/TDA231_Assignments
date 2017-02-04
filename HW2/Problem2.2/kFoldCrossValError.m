@@ -1,14 +1,16 @@
 function [CVE_sph,CVE_new] = kFoldCrossValError(k,X,Y,prior)
 
-%addpath('C:\Users\Donal\Desktop\TDA231 Machine Learning\HW\HW2\Problem2.1b_c')
-addpath('C:\Users\Olle\Documents\TDA231_Assignments\HW2\Problem2.1b_c')
+
 N = size(X,1);
 
 % Split data into class data and subset
 Xpos = SplitClass(1,Y,X);
 Xneg = SplitClass(-1,Y,X);
+
+
 XposSets = SplitData(k,Xpos);
 XnegSets = SplitData(k,Xneg);
+
 Nset_pos = size(XposSets,1);
 Nset_neg = size(XnegSets,1);
 sumError_sph = 0;
