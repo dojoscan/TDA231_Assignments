@@ -4,6 +4,9 @@ dataCount = 1100;
 
 parts = 5
 err = 0;
+mu5 = mean(data(:,:,5),2);
+mu8 = mean(data(:,:,8),2);
+errs = zeros(dataCount,1);
 for part = 1:parts
     
     dataPoints = ones(dataCount,1);
@@ -12,7 +15,8 @@ for part = 1:parts
     testData = horzcat(1:testStart-1, testEnd+1:dataCount);
     
     for i = testStart:testEnd        
-        testErr = (1 - classifyDigitsNew(data(:,i,5), data(:,testData,:)))/2;
+        testErr = (1-new_classifier(data(:,i,5)',mu5',mu8'))/2;
+        errs(i) = testErr;
         err = err + testErr/dataCount;
     end
 end
@@ -27,10 +31,9 @@ for part = 1:parts
     testData = horzcat(1:testStart-1, testEnd+1:dataCount);
     
     for i = testStart:testEnd        
-        testErr = (-1 - classifyDigitsNew(data(:,i,8), data(:,testData,:)))/-2;
+        testErr = (1-new_classifier(data(:,i,8)',mu8',mu5'))/2;
         err = err + testErr/dataCount;
     end
 end
 sprintf('5x cross val error for 8 is: %6.4f\n',err)
 
-%%
