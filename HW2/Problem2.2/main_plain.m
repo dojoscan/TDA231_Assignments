@@ -1,8 +1,9 @@
 load('digits.mat')
 
+%data = transforToVariance(data);
 dataCount = 1100;
-
-parts = 5
+fprintf('\nRunning classifier on plain data..\n')
+parts = 5;
 err = 0;
 mu5 = mean(data(:,:,5),2);
 mu8 = mean(data(:,:,8),2);
@@ -20,7 +21,7 @@ for part = 1:parts
         err = err + testErr/dataCount;
     end
 end
-sprintf('5x cross val error for 5 is: %6.4f\n',err)
+fprintf('5x cross val error for 5 is: %6.4f\n',err)
 
 err = 0;
 for part = 1:parts
@@ -35,5 +36,5 @@ for part = 1:parts
         err = err + testErr/dataCount;
     end
 end
-sprintf('5x cross val error for 8 is: %6.4f\n',err)
+fprintf('5x cross val error for 8 is: %6.4f\n',err)
 

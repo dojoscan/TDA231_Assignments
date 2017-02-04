@@ -1,5 +1,6 @@
 load('digits.mat')
 
+%data = transforToVariance(data);
 dataCount = 1100;
 
 parts = 5
@@ -35,5 +36,5 @@ for part = 1:parts
         err = err + testErr/dataCount;
     end
 end
-sprintf('5x cross val error for 8 is: %6.4f\n',err)
+fprintf('5x cross val error for 8 is: %6.4f\n',err)
 

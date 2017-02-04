@@ -12,7 +12,7 @@ for part = 1:parts
     testData = horzcat(1:testStart-1, testEnd+1:dataCount);
     
     for i = testStart:testEnd        
-        testErr = (1 - classifyDigitsNew(data(:,i,5), data(:,testData,:)))/2;
+        testErr = (1 - classifyDigitsNew(data(:,i,1), data(:,testData,:)))/2;
         err = err + testErr/dataCount;
     end
 end
@@ -34,4 +34,3 @@ end
 sprintf('5x cross val error for 8 is: %6.4f\n',err)
 
 %%
-classifyDigitsNew(data(:,56,5), data)/(dataCount/parts)
