@@ -1,7 +1,7 @@
 load('digits.mat')
 
-%data = transforToVariance(data);
 dataCount = 1100;
+
 fprintf('\nRunning classifier on plain data..\n')
 parts = 5;
 err = 0;
@@ -15,10 +15,12 @@ for part = 1:parts
     testEnd = dataCount/parts*(part);
     testData = horzcat(1:testStart-1, testEnd+1:dataCount);
     
-    for i = testStart:testEnd        
+    for i = testStart:testEnd
         testErr = (1-new_classifier(data(:,i,5)',mu5',mu8'))/2;
+        testErr = testErr + (1+new_classifier(data(:,i,8)',mu5',mu8'))/2;
         errs(i) = testErr;
-        err = err + testErr/dataCount;
+        err = err + testErr/(dataCount*2);
+        
     end
 end
 fprintf('5x cross val error for 5 is: %6.4f\n',err)
@@ -31,9 +33,12 @@ for part = 1:parts
     testEnd = dataCount/parts*(part);
     testData = horzcat(1:testStart-1, testEnd+1:dataCount);
     
-    for i = testStart:testEnd        
+    for i = testStart:testEnd
         testErr = (1-new_classifier(data(:,i,8)',mu8',mu5'))/2;
-        err = err + testErr/dataCount;
+        testErr = testErr + (1+new_classifier(data(:,i,5)',mu8',mu5'))/2;
+        errs(i) = testErr;
+        err = err + testErr/(dataCount*2);
+        
     end
 end
 fprintf('5x cross val error for 8 is: %6.4f\n',err)
