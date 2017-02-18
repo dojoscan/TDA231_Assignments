@@ -1,4 +1,4 @@
-function net(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier, do_early_stopping, mini_batch_size)
+function data_cost = net(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier, do_early_stopping, mini_batch_size)
   model = init_model(n_hid);
   from_data_file = load('data.mat');
   datas = from_data_file.data;
@@ -65,6 +65,7 @@ function net(wd_coefficient, n_hid, n_iters, learning_rate, momentum_multiplier,
   for data_i = 1:3
     data = datas2{data_i};
     data_name = data_names{data_i};
+    data_cost(data_i) = cost(model, data, wd_coefficient);
     fprintf('\nThe cost on the %s data is %f\n', data_name, cost(model, data, wd_coefficient));
     if wd_coefficient~=0
       fprintf('The classification cost (i.e. without weight decay) on the %s data is %f\n', data_name, cost(model, data, 0));
