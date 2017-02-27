@@ -1,0 +1,1 @@
+SVM = svmtrain(X,Y,'kernel_function','linear','ShowPlot',true,'AutoScale','false');
