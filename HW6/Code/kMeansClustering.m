@@ -4,7 +4,7 @@ function [labels,clusters] = kMeansClustering(k,points)
 maxVect = max(points);
 minVect = min(points);
 diffVect = maxVect-minVect;
-clusters = (rand(k,nDim).*diffVect)+minVect;
+clusters = (rand(k,nDim).*repmat(diffVect,k,1))+repmat(minVect,k,1);
 disagree = 100;
 oldLabels = ones(nPoints,1);
 
